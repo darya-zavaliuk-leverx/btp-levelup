@@ -7,8 +7,8 @@ annotate service.Incidents with @(
         Data : [
             {
                 $Type: 'UI.DataField',
-                Label: '{i18n>Customerid}',
-                Value: customer.name,
+                Label: '{i18n>CustomerId}',
+                Value: customer.ID
             },
             {
                 $Type: 'UI.DataField',
@@ -59,16 +59,28 @@ annotate service.Incidents with @(
         {
             $Type: 'UI.DataField',
             Value: customer.name,
-            Label: '{i18n>Name1}',
+            Label: '{i18n>CustomerName}',
         },
         {
             $Type      : 'UI.DataField',
             Value      : status.descr,
             Criticality: status.criticality,
+            Label : '{i18n>StatusCode}',
+        },
+        {
+            $Type      : 'UI.DataField',
+            Value      : status_code,
+            ![@UI.Hidden],
         },
         {
             $Type: 'UI.DataField',
             Value: urgency.descr,
+            Label : '{i18n>Urgency}',
+        },
+        {
+            $Type      : 'UI.DataField',
+            Value      : urgency_code,
+            ![@UI.Hidden],
         },
     ],
     UI.SelectionFields           : [
@@ -87,20 +99,7 @@ annotate service.Incidents with @(
             Value: customer.name,
         },
         TypeImageUrl  : 'sap-icon://alert',
-    },
-    UI.FieldGroup #i18nDetails   : {
-        $Type: 'UI.FieldGroupType',
-        Data : [
-            {
-                $Type: 'UI.DataField',
-                Value: status_code,
-            },
-            {
-                $Type: 'UI.DataField',
-                Value: urgency_code,
-            },
-        ],
-    },
+    }
 );
 
 annotate service.Incidents with {
@@ -134,19 +133,17 @@ annotate service.Incidents with {
 
 annotate service.Incidents with {
     status @(
-        Common.Label                   : '{i18n>Statuscode}',
+        Common.Label                   : '{i18n>StatusCode}',
         Common.ValueListWithFixedValues: true,
-        Common.Text                    : status.descr,
-        UI.TextArrangement             : #TextOnly,
+        Common.Text                    : status.descr
     )
 };
 
 annotate service.Incidents with {
     urgency @(
-        Common.Label                   : '{i18n>Urgencycode}',
+        Common.Label                   : '{i18n>UrgencyCode}',
         Common.ValueListWithFixedValues: true,
-        Common.Text                    : urgency.descr,
-        UI.TextArrangement             : #TextOnly,
+        Common.Text                    : urgency.descr
     )
 };
 
@@ -193,6 +190,9 @@ annotate service.Comments with @(UI.LineItem #Comments: [
 ]);
 
 annotate service.Incidents with {
-    ID @(UI.HiddenFilter);
-    customer_ID @(UI.HiddenFilter);
+    ID @(UI.HiddenFilter)
 };
+annotate service.Incidents with {
+    title @Common.Text : customer.name
+};
+

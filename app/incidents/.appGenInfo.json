@@ -4,7 +4,7 @@
     "generatorPlatform": "SAP Business Application Studio",
     "serviceType": "Local Cap",
     "metadataFilename": "",
-    "serviceUrl": "http://localhost:4004/odata/v4/processor/",
+    "serviceUrl": "http://localhost:4005/odata/v4/processor/",
     "appName": "incidents",
     "appTitle": "Incident-Management",
     "appDescription": "An SAP Fiori application.",
@@ -28,6 +28,6 @@
         "value": "None"
       }
     ],
-    "launchText": "In order to launch the generated app, simply start your CAP project and navigate to the following location in your browser:\n\nhttp://localhost:4004/incidents/webapp/index.html"
+    "launchText": "In order to launch the generated app, simply start your CAP project and navigate to the following location in your browser:\n\nhttp://localhost:4005/incidents/webapp/index.html"
   }
 }

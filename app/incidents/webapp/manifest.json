@@ -128,8 +128,28 @@
                     "type": "ResponsiveTable",
                     "enableExport": true,
                     "selectAll": true,
-                    "selectionLimit": -10,
-                    "selectionMode": "Multi"
+                    "selectionLimit": 10,
+                    "selectionMode": "Multi",
+                    "disableCopyToClipboard": false,
+                    "personalization": {
+                      "column": true,
+                      "filter": true,
+                      "sort": true
+                    }
+                  },
+                  "columns": {
+                    "DataField::title": {
+                      "width": "25%"
+                    },
+                    "DataField::customer::name": {
+                      "width": "25%"
+                    },
+                    "DataField::status::descr": {
+                      "width": "25%"
+                    },
+                    "DataField::urgency::descr": {
+                      "width": "25%"
+                    }
                   }
                 }
               },
