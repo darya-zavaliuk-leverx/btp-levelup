@@ -1,0 +1,8 @@
+{
+  "N": "sap-icon://status-inactive",
+  "A": "sap-icon://status-in-process",
+  "I": "sap-icon://activate",
+  "H": "sap-icon://pending",
+  "R": "sap-icon://accept",
+  "C": "sap-icon://decline"
+}

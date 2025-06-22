@@ -1,5 +1,5 @@
-using ProcessorService as service from '../../srv/cat-service';
-using from '../../db/schema';
+using ProcessorService as service from '../../srv/processor-service';
+using from '../../db';
 
 annotate service.Incidents with @(
     UI.FieldGroup #GeneratedGroup: {
@@ -158,6 +158,21 @@ annotate service.Incidents with {
 annotate service.Incidents with {
     status @(
         Common.Label                   : '{i18n>StatusCode}',
+        Common.ValueList               : {
+            $Type         : 'Common.ValueListType',
+            CollectionPath: 'Status',
+            Parameters    : [
+                {
+                    $Type            : 'Common.ValueListParameterInOut',
+                    LocalDataProperty: status_code,
+                    ValueListProperty: 'code',
+                },
+                {
+                    $Type            : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty: 'descr',
+                }
+            ]
+        },
         Common.ValueListWithFixedValues: true,
         Common.Text                    : status.descr
     )
@@ -170,6 +185,21 @@ annotate service.Incidents with {
 annotate service.Incidents with {
     urgency @(
         Common.Label                   : '{i18n>UrgencyCode}',
+        Common.ValueList               : {
+            $Type         : 'Common.ValueListType',
+            CollectionPath: 'Urgency',
+            Parameters    : [
+                {
+                    $Type            : 'Common.ValueListParameterInOut',
+                    LocalDataProperty: urgency_code,
+                    ValueListProperty: 'code',
+                },
+                {
+                    $Type            : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty: 'descr',
+                }
+            ]
+        },
         Common.ValueListWithFixedValues: true,
         Common.Text                    : urgency.descr
     )
