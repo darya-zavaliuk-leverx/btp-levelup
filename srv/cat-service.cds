@@ -34,3 +34,8 @@ service AdminService {
 }
 
 annotate ProcessorService.Incidents with @odata.draft.enabled;
+
+annotate ProcessorService.Incidents with {
+    ID @UI.Hidden, @UI.HiddenFilter;
+    customer_ID @UI.Hidden, @UI.HiddenFilter;
+};

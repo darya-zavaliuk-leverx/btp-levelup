@@ -8,7 +8,7 @@ annotate service.Incidents with @(
             {
                 $Type: 'UI.DataField',
                 Label: '{i18n>Customerid}',
-                Value: customer_ID,
+                Value: customer.name,
             },
             {
                 $Type: 'UI.DataField',
@@ -137,6 +137,7 @@ annotate service.Incidents with {
         Common.Label                   : '{i18n>Statuscode}',
         Common.ValueListWithFixedValues: true,
         Common.Text                    : status.descr,
+        UI.TextArrangement             : #TextOnly,
     )
 };
 
@@ -145,6 +146,7 @@ annotate service.Incidents with {
         Common.Label                   : '{i18n>Urgencycode}',
         Common.ValueListWithFixedValues: true,
         Common.Text                    : urgency.descr,
+        UI.TextArrangement             : #TextOnly,
     )
 };
 
@@ -189,3 +191,8 @@ annotate service.Comments with @(UI.LineItem #Comments: [
         Label: '{i18n>CreatedAt}'
     },
 ]);
+
+annotate service.Incidents with {
+    ID @(UI.HiddenFilter);
+    customer_ID @(UI.HiddenFilter);
+};
