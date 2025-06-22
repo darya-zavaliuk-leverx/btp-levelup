@@ -5,7 +5,10 @@ using {sap.capire.incidents as my} from '../db/schema';
  */
 service ProcessorService {
     @cds.redirection.target
-    entity Incidents       as projection on my.Incidents;
+    entity Incidents       as projection on my.Incidents {
+        *,
+        statusImageUrl : String;
+    };
 
     @readonly
     entity ListOfIncidents as
@@ -28,7 +31,10 @@ service AdminService {
     entity Customers as projection on my.Customers;
 
     @cds.redirection.target
-    entity Incidents as projection on my.Incidents;
+    entity Incidents as projection on my.Incidents {
+        *,
+        statusImageUrl : String;
+    };
 
     entity Comments  as projection on my.Comments;
 }
