@@ -20,7 +20,8 @@ entity Incidents : cuid, managed {
                        author    : type of managed : createdBy;
                        message   : String;
                  };
-  comments     : Association to many Comments on comments.incident = $self;
+  comments     : Association to many Comments
+                   on comments.incident = $self;
 }
 
 /**
@@ -48,8 +49,8 @@ entity Addresses : cuid, managed {
 }
 
 entity Comments : cuid, managed {
-  incident  : Association to Incidents;
-  comment   : String;
+  incident : Association to Incidents;
+  comment  : String;
 }
 
 entity Status : CodeList {
