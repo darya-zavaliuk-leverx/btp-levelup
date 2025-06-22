@@ -1,0 +1,169 @@
+_schema-version: 3.3.0
+ID: btp_levelup
+description: A simple CAP project.
+version: 1.0.0
+modules:
+- name: btp_levelup-srv
+  type: nodejs
+  path: gen/srv
+  requires:
+  - name: btp_levelup-db
+  - name: btp_levelup-auth
+  - name: btp_levelup-destination
+  provides:
+  - name: srv-api
+    properties:
+      srv-url: ${default-url}
+  parameters:
+    buildpack: nodejs_buildpack
+    instances: 1
+  build-parameters:
+    builder: npm-ci
+- name: btp_levelup-db-deployer
+  type: hdb
+  path: gen/db
+  requires:
+  - name: btp_levelup-db
+  parameters:
+    buildpack: nodejs_buildpack
+- name: btp_levelup
+  type: approuter.nodejs
+  path: app/router
+  requires:
+  - name: srv-api
+    group: destinations
+    properties:
+      forwardAuthToken: true
+      name: srv-api
+      url: ~{srv-url}
+  - name: btp_levelup-auth
+  - name: btp_levelup-destination
+  - name: btp_levelup-html5-runtime
+  provides:
+  - name: app-api
+    properties:
+      app-protocol: ${protocol}
+      app-uri: ${default-uri}
+  parameters:
+    disk-quota: 256M
+    keep-existing-routes: true
+    memory: 256M
+- name: btp_levelup-app-deployer
+  type: com.sap.application.content
+  path: gen
+  requires:
+  - name: btp_levelup-html5-repo-host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: app/
+    requires:
+    - artifacts:
+      - nsincidents.zip
+      name: nsincidents
+      target-path: app/
+- name: btp_levelup-destinations
+  type: com.sap.application.content
+  requires:
+  - name: btp_levelup-auth
+    parameters:
+      service-key:
+        name: btp_levelup-auth-key
+  - name: btp_levelup-html5-repo-host
+    parameters:
+      service-key:
+        name: btp_levelup-html5-repo-host-key
+  - name: srv-api
+  - name: btp_levelup-destination
+    parameters:
+      content-target: true
+  parameters:
+    content:
+      instance:
+        destinations:
+        - Name: btp_levelup-html5-repository
+          ServiceInstanceName: btp_levelup-html5-repo-host
+          ServiceKeyName: btp_levelup-html5-repo-host-key
+          sap.cloud.service: btp_levelup.service
+        - Authentication: OAuth2UserTokenExchange
+          Name: btp_levelup-auth
+          ServiceInstanceName: btp_levelup-auth
+          ServiceKeyName: btp_levelup-auth-key
+          sap.cloud.service: btp_levelup.service
+        existing_destinations_policy: update
+  build-parameters:
+    no-source: true
+- name: nsincidents
+  type: html5
+  path: app/incidents
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+resources:
+- name: btp_levelup-db
+  type: com.sap.xs.hdi-container
+  parameters:
+    service: hana
+    service-plan: hdi-shared
+- name: btp_levelup-auth
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      tenant-mode: dedicated
+      xsappname: btp_levelup-${org}-${space}
+    path: ./xs-security.json
+    service: xsuaa
+    service-plan: application
+- name: btp_levelup-destination
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            HTML5.DynamicDestination: true
+            HTML5.ForwardAuthToken: true
+            Name: srv-api
+            ProxyType: Internet
+            Type: HTTP
+            URL: ~{srv-api/srv-url}
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          existing_destinations_policy: update
+    service: destination
+    service-plan: lite
+  requires:
+  - name: srv-api
+    group: destinations
+    properties:
+      forwardAuthToken: true
+      name: srv-api
+      url: ~{srv-url}
+- name: btp_levelup-html5-repo-host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-plan: app-host
+- name: btp_levelup-html5-runtime
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-plan: app-runtime
+parameters:
+  deploy_mode: html5-repo
+  enable-parallel-deployments: true
+build-parameters:
+  before-all:
+  - builder: custom
+    commands:
+    - npm ci
+    - npx cds build --production
