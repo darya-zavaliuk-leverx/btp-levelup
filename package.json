@@ -51,7 +51,6 @@
     }
   },
   "sapux": [
-    "app/incidents",
-    "app/freestyle"
+    "app/incidents"
   ]
 }

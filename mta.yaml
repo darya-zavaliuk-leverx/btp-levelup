@@ -62,10 +62,6 @@ modules:
       - nsincidents.zip
       name: nsincidents
       target-path: app/
-    - artifacts:
-      - nsfreestyle.zip
-      name: nsfreestyle
-      target-path: app/
 - name: btp_levelup-destinations
   type: com.sap.application.content
   requires:
@@ -100,16 +96,6 @@ modules:
 - name: nsincidents
   type: html5
   path: app/incidents
-  build-parameters:
-    build-result: dist
-    builder: custom
-    commands:
-    - npm install
-    - npm run build:cf
-    supported-platforms: []
-- name: nsfreestyle
-  type: html5
-  path: app/freestyle
   build-parameters:
     build-result: dist
     builder: custom
