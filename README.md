@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Getting Started
 
 Welcome to your new project.
@@ -23,3 +24,6 @@ File or Folder | Purpose
 ## Learn More
 
 Learn more at https://cap.cloud.sap/docs/get-started/.
+=======
+# btp-levelup
+>>>>>>> 830194f7cdf27f743cc22405634f4394cf3140c4
