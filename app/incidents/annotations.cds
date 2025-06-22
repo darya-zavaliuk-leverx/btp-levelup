@@ -123,6 +123,10 @@ annotate service.Incidents with @(
 );
 
 annotate service.Incidents with {
+    title @(UI.HiddenFilter: true);
+};
+
+annotate service.Incidents with {
     customer @(
         Common.ValueList               : {
             $Type         : 'Common.ValueListType',
