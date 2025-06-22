@@ -180,10 +180,60 @@
                     "type": "ResponsiveTable",
                     "creationMode": {
                       "inlineCreationRowsHiddenInEditMode": true
+                    },
+                    "disableCopyToClipboard": false,
+                    "personalization": {
+                      "column": true,
+                      "filter": true,
+                      "sort": true
+                    }
+                  },
+                  "columns": {
+                    "DataField::message": {
+                      "width": "33%"
+                    },
+                    "DataField::author": {
+                      "width": "33%"
+                    },
+                    "DataField::timestamp": {
+                      "width": "33%"
+                    }
+                  }
+                },
+                "comments/@com.sap.vocabularies.UI.v1.LineItem#Comments": {
+                  "tableSettings": {
+                    "disableCopyToClipboard": false,
+                    "enableExport": true,
+                    "enableFullScreen": true,
+                    "enablePaste": true,
+                    "selectionMode": "Multi",
+                    "selectionLimit": 30,
+                    "type": "ResponsiveTable",
+                    "personalization": {
+                      "column": true,
+                      "filter": true,
+                      "sort": true
+                    }
+                  },
+                  "columns": {
+                    "DataField::comment": {
+                      "width": "33%"
+                    },
+                    "DataField::createdBy": {
+                      "width": "33%"
+                    },
+                    "DataField::createdAt": {
+                      "width": "33%"
                     }
                   }
                 }
-              }
+              },
+              "content": {
+                "header": {
+                  "anchorBarVisible": true
+                }
+              },
+              "showRelatedApps": false
             }
           },
           "controlAggregation": "midColumnPages",
