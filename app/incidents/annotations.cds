@@ -30,10 +30,11 @@ annotate service.Incidents with @(
                     Target: '@UI.FieldGroup#GeneratedGroup',
                 },
                 {
-                    $Type : 'UI.ReferenceFacet',
-                    Label : '{i18n>Details}',
-                    ID    : 'i18nDetails',
-                    Target: '@UI.FieldGroup#i18nDetails',
+                    $Type               : 'UI.ReferenceFacet',
+                    Label               : '{i18n>Details}',
+                    ID                  : 'i18nDetails',
+                    Target              : '@UI.FieldGroup#i18nDetails',
+                    ![@UI.PartOfPreview]: false,
                 },
             ],
         },
@@ -65,27 +66,33 @@ annotate service.Incidents with @(
             $Type      : 'UI.DataField',
             Value      : status.descr,
             Criticality: status.criticality,
-            Label : '{i18n>StatusCode}',
+            Label      : '{i18n>StatusCode}',
         },
         {
-            $Type      : 'UI.DataField',
-            Value      : status_code,
+            $Type: 'UI.DataField',
+            Value: status_code,
+            ![@UI.Hidden],
+        },
+        {
+            $Type: 'UI.DataField',
+            Value: statusImageUrl,
             ![@UI.Hidden],
         },
         {
             $Type: 'UI.DataField',
             Value: urgency.descr,
-            Label : '{i18n>Urgency}',
+            Label: '{i18n>Urgency}',
         },
         {
-            $Type      : 'UI.DataField',
-            Value      : urgency_code,
+            $Type: 'UI.DataField',
+            Value: urgency_code,
             ![@UI.Hidden],
         },
     ],
     UI.SelectionFields           : [
         status_code,
         urgency_code,
+        title
     ],
     UI.HeaderInfo                : {
         Title         : {
@@ -98,8 +105,21 @@ annotate service.Incidents with @(
             $Type: 'UI.DataField',
             Value: customer.name,
         },
-        TypeImageUrl  : 'sap-icon://alert',
-    }
+        TypeImageUrl  : statusImageUrl,
+    },
+    UI.FieldGroup #i18nDetails   : {
+        $Type: 'UI.FieldGroupType',
+        Data : [
+            {
+                $Type: 'UI.DataField',
+                Value: status_code,
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: urgency_code,
+            },
+        ],
+    },
 );
 
 annotate service.Incidents with {
@@ -140,6 +160,10 @@ annotate service.Incidents with {
 };
 
 annotate service.Incidents with {
+    statusImageUrl @(UI.HiddenFilter: true);
+}
+
+annotate service.Incidents with {
     urgency @(
         Common.Label                   : '{i18n>UrgencyCode}',
         Common.ValueListWithFixedValues: true,
@@ -169,6 +193,16 @@ annotate service.Incidents.conversation with @(UI.LineItem #Conversation: [
         $Type: 'UI.DataField',
         Value: timestamp,
     },
+    {
+        $Type: 'UI.DataField',
+        Value: ID,
+        ![@UI.Hidden],
+    },
+    {
+        $Type: 'UI.DataField',
+        Value: up__ID,
+        ![@UI.Hidden],
+    },
 ]);
 
 annotate service.Comments with @(UI.LineItem #Comments: [
@@ -187,12 +221,25 @@ annotate service.Comments with @(UI.LineItem #Comments: [
         Value: createdAt,
         Label: '{i18n>CreatedAt}'
     },
+    {
+        $Type: 'UI.DataField',
+        Value: ID,
+        ![@UI.Hidden],
+    },
+    {
+        $Type: 'UI.DataField',
+        Value: incident_ID,
+        ![@UI.Hidden],
+    },
 ]);
 
 annotate service.Incidents with {
     ID @(UI.HiddenFilter)
 };
-annotate service.Incidents with {
-    title @Common.Text : customer.name
-};
 
+annotate service.Incidents with {
+    title @(
+        Common.Text : customer.name,
+        Common.Label: '{i18n>Title}',
+    )
+};
