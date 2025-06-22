@@ -5,7 +5,11 @@ using {sap.capire.incidents as my} from '../db/schema';
  */
 service ProcessorService {
     @cds.redirection.target
-    entity Incidents       as projection on my.Incidents;
+    entity Incidents       as
+        projection on my.Incidents {
+            *,
+            virtual null as statusImageUrl : String
+        };
 
     @readonly
     entity ListOfIncidents as
@@ -28,7 +32,11 @@ service AdminService {
     entity Customers as projection on my.Customers;
 
     @cds.redirection.target
-    entity Incidents as projection on my.Incidents;
+    entity Incidents as
+        projection on my.Incidents {
+            *,
+            virtual null as statusImageUrl : String
+        };
 
     entity Comments  as projection on my.Comments;
 }
@@ -36,6 +44,6 @@ service AdminService {
 annotate ProcessorService.Incidents with @odata.draft.enabled;
 
 annotate ProcessorService.Incidents with {
-    ID @UI.Hidden;
+    ID       @UI.Hidden;
     customer @UI.Hidden;
 };
