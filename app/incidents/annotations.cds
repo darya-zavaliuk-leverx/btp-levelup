@@ -43,6 +43,12 @@ annotate service.Incidents with @(
             ID : 'Conversation',
             Target : 'conversation/@UI.LineItem#Conversation',
         },
+        {
+            $Type : 'UI.ReferenceFacet',
+            Label : '{i18n>Comments}',
+            ID : 'Comments',
+            Target : 'comments/@UI.LineItem#Comments',
+        },
     ],
     UI.LineItem : [
         {
@@ -164,6 +170,26 @@ annotate service.Incidents.conversation with @(
         {
             $Type : 'UI.DataField',
             Value : timestamp,
+        },
+    ]
+);
+
+annotate service.Comments with @(
+    UI.LineItem #Comments : [
+        {
+            $Type : 'UI.DataField',
+            Value : comment,
+            Label : '{i18n>Comment}'
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : createdBy,
+            Label : '{i18n>Author}'
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : createdAt,
+            Label : '{i18n>CreatedAt}'
         },
     ]
 );
