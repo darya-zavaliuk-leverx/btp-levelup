@@ -51,6 +51,7 @@
     }
   },
   "sapux": [
-    "app/incidents"
+    "app/incidents",
+    "app/listofincidents"
   ]
 }
