@@ -54,6 +54,7 @@
   "sapux": [
     "app/incidents",
     "app/ns.listofincidents",
-    "app/listofincidents"
+    "app/listofincidents",
+    "app/items"
   ]
 }

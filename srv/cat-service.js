@@ -12,7 +12,7 @@ const ICONS = {
 class ProcessorService extends cds.ApplicationService {
   /** Registering custom event handlers */
   init() {
-    const { Incidents } = this.entities;
+    const { Incidents, Customers } = this.entities;
 
     // BEFORE handlers
     this.before("CREATE", Incidents, (req) => this.changeUrgencyDueToSubject(req.data));
@@ -22,6 +22,13 @@ class ProcessorService extends cds.ApplicationService {
     this.after("READ", Incidents, (each) => {
       const rows = Array.isArray(each) ? each : [each];
       for (const row of rows) this.setImage(row);
+    });
+
+    this.before('READ', Incidents, async req => {
+      const customers = await cds.transaction(req)
+        .run(SELECT.from(Customers));
+
+        console.log(customers)
     });
 
     return super.init();

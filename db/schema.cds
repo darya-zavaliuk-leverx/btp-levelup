@@ -75,3 +75,13 @@ entity Urgency : CodeList {
 
 type EMailAddress : String;
 type PhoneNumber  : String;
+
+/**
+ * Simple Items entity
+ */
+entity Items {
+  key ID   : UUID;
+      title  : String;
+      descr  : String;
+      quantity : Integer;
+}
