@@ -24,3 +24,6 @@ File or Folder | Purpose
 
 Learn more at https://cap.cloud.sap/docs/get-started/.
 
+## Postman Collection
+
+https://.postman.co/workspace/Test~1edda7ce-9ebe-4609-8308-7140cf0edfef/collection/26178970-5cddea62-e8de-4ff9-82e5-5b8ec71b571d?action=share&creator=26178970
