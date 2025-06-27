@@ -34,7 +34,19 @@
           "users": {
             "incident.support@tester.sap.com": {
               "password": "initial",
-              "roles": []
+              "roles": [
+                "support"
+              ]
+            },
+            "alice": {
+              "roles": [
+                "support"
+              ]
+            },
+            "bob": {
+              "roles": [
+                "support"
+              ]
             }
           }
         }

@@ -42,8 +42,5 @@ service AdminService {
 }
 
 annotate ProcessorService.Incidents with @odata.draft.enabled;
-
-annotate ProcessorService.Incidents with {
-    ID       @UI.Hidden;
-    customer @UI.Hidden;
-};
+annotate ProcessorService with @(requires: 'support');
+annotate AdminService with @(requires: 'admin');

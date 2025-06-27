@@ -127,6 +127,11 @@ annotate service.Incidents with {
 };
 
 annotate service.Incidents with {
+    ID       @UI.Hidden;
+    customer @UI.Hidden;
+};
+
+annotate service.Incidents with {
     customer @(
         Common.ValueList               : {
             $Type         : 'Common.ValueListType',
