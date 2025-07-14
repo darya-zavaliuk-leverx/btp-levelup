@@ -1,12 +1,10 @@
-sap.ui.define(
-    ["sap/fe/core/AppComponent"],
-    function (Component) {
-        "use strict";
-
-        return Component.extend("ns.listofincidents.listofincidents.Component", {
-            metadata: {
-                manifest: "json"
-            }
-        });
-    }
-);
+sap.ui.define([
+    "sap/ui/core/UIComponent"
+], function (UIComponent) {
+    "use strict";
+    return UIComponent.extend("ns.listofincidents.Component", {
+        metadata: {
+            manifest: "json"
+        }
+    });
+});

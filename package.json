@@ -6,17 +6,23 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
+    "@cap-js/hana": "^1",
     "@sap/cds": "^8",
+    "@sap/xssec": "^3",
     "express": "^4",
-    "@sap/xssec": "^4",
-    "@cap-js/hana": "^1"
+    "@sap/cds-hana": "^2"
   },
   "devDependencies": {
     "@cap-js/cds-types": "^0.10.0",
     "@cap-js/sqlite": "^1",
     "@sap/cds-dk": "^8",
-    "rimraf": "^5.0.5",
-    "mbt": "^1.2.29"
+    "axios": "^1.10.0",
+    "chai": "^4.5.0",
+    "chai-as-promised": "^7.1.2",
+    "chai-subset": "^1.6.0",
+    "jest": "^30.0.3",
+    "mbt": "^1.2.29",
+    "rimraf": "^5.0.5"
   },
   "scripts": {
     "start": "cds-serve",
@@ -57,7 +63,11 @@
       },
       "html5-repo": true,
       "destinations": true,
-      "workzone": true
+      "workzone": true,
+      "multitenancy": true,
+      "extensibility": true,
+      "toggles": true,
+      "auth": "xsuaa"
     },
     "sql": {
       "native_hana_associations": false

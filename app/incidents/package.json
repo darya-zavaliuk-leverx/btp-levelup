@@ -8,14 +8,20 @@
     "sapui5"
   ],
   "main": "webapp/index.html",
-  "dependencies": {},
   "devDependencies": {
-    "@ui5/cli": "^3.0.0",
     "@sap/ux-ui5-tooling": "1",
+    "@sap/cds-dk": "^8",
+    "@ui5/cli": "^3.0.0",
+    "axios": "^1.10.0",
+    "chai": "^4.5.0",
+    "chai-as-promised": "^7.1.2",
+    "chai-subset": "^1.6.0",
+    "jest": "^30.0.3",
     "ui5-task-zipper": "^3.4.x"
   },
   "scripts": {
     "deploy-config": "npx -p @sap/ux-ui5-tooling fiori add deploy-config cf",
+    "test": "jest webapp/test/unit/tests.test.js",
     "build:cf": "ui5 build preload --clean-dest --config ui5-deploy.yaml --include-task=generateCachebusterInfo"
   }
 }

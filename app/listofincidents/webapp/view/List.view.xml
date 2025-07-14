@@ -1,0 +1,11 @@
+<mvc:View
+  controllerName="ns.listofincidents.controller.List"
+  xmlns:mvc="sap.ui.core.mvc"
+  displayBlock="true"
+  xmlns="sap.m">
+  <List id="list" items="{path: '/ListOfIncidents'}">
+    <StandardListItem
+      title="{title}"
+      description="{customer_ID}"/>
+  </List>
+</mvc:View>
