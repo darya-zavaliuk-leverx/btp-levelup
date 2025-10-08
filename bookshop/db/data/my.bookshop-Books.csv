@@ -1,0 +1,5 @@
+ID;title;descr;author_ID;stock;price;currency_code
+201;Wuthering Heights;"The story of the passionately in love";101;12;11.11;GBP
+207;Oliver Twist;"The story of an orphan";107;22;22.22;GBP
+251;Hamlet;"A tragedy written by Shakespeare";150;4;33.33;GBP
+252;King Richard III;"Another tragedy";150;5;44.44;GBP
